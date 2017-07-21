@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y apache2 \
     python \
     python-dev\
     python-pip \
-    vim \
+    emacs \
  && apt-get clean \
  && apt-get autoremove \
  && rm -rf /var/lib/apt/lists/*
