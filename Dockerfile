@@ -20,8 +20,8 @@ RUN apt-get update && apt-get install -y apache2 \
  && apt-get autoremove \
  && rm -rf /var/lib/apt/lists/*
 
-# RUN wget https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-ppc64le.sh -O ~/anaconda.sh
-# RUN bash ~/anaconda.sh -b -p $HOME/anaconda
+RUN wget https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-ppc64le.sh -O ~/anaconda.sh
+RUN bash ~/anaconda.sh -b -p ~/anaconda
 
 # Copy over and install the requirements
 COPY ./app/requirements.txt /var/www/apache-flask/app/requirements.txt
