@@ -21,8 +21,15 @@ RUN apt-get update && apt-get install -y apache2 \
  && apt-get autoremove \
  && rm -rf /var/lib/apt/lists/*
 
-RUN wget https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-ppc64le.sh -O ~/anaconda.sh
-RUN bash ~/anaconda.sh -b -p ~/anaconda
+RUN apt-get update --fix-missing && apt-get install -y wget bzip2 ca-certificates \
+    libglib2.0-0 libxext6 libsm6 libxrender1 \
+    git mercurial subversion
+
+RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
+    wget --quiet https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-x86_64.sh -O ~/anaconda.sh && \
+    /bin/bash ~/anaconda.sh -b -p /opt/conda && \
+    rm ~/anaconda.sh
+
 
 # Copy over and install the requirements
 COPY ./app/requirements.txt /var/www/apache-flask/app/requirements.txt
